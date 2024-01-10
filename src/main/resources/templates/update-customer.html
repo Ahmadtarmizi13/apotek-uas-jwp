@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+    <!-- Add your CSS links or stylesheets here -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #bebcbc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #2cafc0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #d21212;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #0004ff;
+            color: #47d520;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0025fa;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="#" th:action="@{/customers}" th:object="${customer}" method="post">
+        <table>
+            <tr>
+                <td> <label for="customerId">Customer id</label></td>
+                <td> <input type="text" th:field="*{customerId}" id="customerId" placeholder="Customer id"></td>
+            </tr>
+            <tr>
+                <td> <label for="customerName">Customer name</label></td>
+                <td> <input type="text" th:field="*{customerName}" id="customerName" placeholder="Customer name"></td>
+                <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="error"></td>
+    
+            </tr>
+            <tr>
+                <td> <label for="dateofBirth">Date of birth</label></td>
+                <td> <input type="date" th:field="*{dateofBirth}" id="dateofBirth" placeholder="Date of birth"></td>
+                <td th:if="${#fields.hasErrors('dateofBirth')}" th:errors="*{dateofBirth}" class="error"></td>
+    
+            </tr>
+            <td> <label for="phoneNumber">Phone number</label></td>
+            <td> <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone number"></td>
+    
+        </tr>
+            <tr>
+                <td> <label for="address">Address</label></td>
+                <td> <input type="text" th:field="*{address}" id="address" placeholder="Address"></td>
+    
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Update Customer"></td>
+            </tr>
+        </table>
+    </form>
+    <!-- Add your JavaScript scripts or links here -->
+</body>
+
+</html>
