@@ -1,0 +1,101 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Apotek Web</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<style>
+/* Reset some default styles */
+body, h1, h2, h3, p, table {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #6fa458;
+}
+
+form {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+}
+</style>
+
+
+<form action="#" th:action="@{/customers}" th:object="${customer}" method="post">
+    <table>
+        <tr>
+            <td> <label for="customerId">Customer id</label></td>
+            <td> <input type="text" th:field="*{customerId}" id="customerId" placeholder="Customer id"></td>
+        </tr>
+        <tr>
+            <td> <label for="customerName">Customer name</label></td>
+            <td> <input type="text" th:field="*{customerName}" id="customerName" placeholder="Customer name"></td>
+            <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="error"></td>
+
+        </tr>
+        <tr>
+            <td> <label for="dateofBirth">Date of birth</label></td>
+            <td> <input type="date" th:field="*{dateofBirth}" id="dateofBirth" placeholder="Date of birth"></td>
+            <td th:if="${#fields.hasErrors('dateofBirth')}" th:errors="*{dateofBirth}" class="error"></td>
+
+        </tr>
+        <td> <label for="phoneNumber">Phone number</label></td>
+        <td> <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone number"></td>
+
+    </tr>
+        <tr>
+            <td> <label for="address">Address</label></td>
+            <td> <input type="text" th:field="*{address}" id="address" placeholder="Address"></td>
+
+        </tr>
+        <tr>
+            <td> <input type="submit" value="Add Customer"></td>
+
+        </tr>
+        <tr>
+            <div th:if="${#fields.hasErrors('global')}">
+                <h3>errors:</h3>
+                <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+            </div>
+        </tr>
+
+    </table>
+
+
+</form>

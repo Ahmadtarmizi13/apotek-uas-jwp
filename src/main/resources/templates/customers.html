@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <!-- Add your stylesheets or styles here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #070707;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #5cca4bc4;
+        }
+
+        a {
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div th:switch="${customers}">
+        <div th:case="*">
+            <h2>Apotek Permana</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Date of Birth</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="customer : ${customers}">
+                        <td th:text="${customer.customerId}"></td>
+                        <td th:text="${customer.customerName}"></td>
+                        <td th:text="${#dates.format(customer.dateofBirth, 'dd-MMM-yyyy')}"></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.address}"></td>
+                        <td><a th:href="@{/customers/edit/{customerId}(customerId=${customer.customerId})}">Edit</a></td>
+                        <td><a th:href="@{/customers/{customerId}/delete (customerId=${customer.customerId})}">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/signup-medicine">Add a new medicine</a></p>
+        <p><a href="/signup-customer">Add a new customer</a></p>
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>
